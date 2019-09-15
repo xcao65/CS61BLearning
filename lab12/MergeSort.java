@@ -11,7 +11,7 @@ public class MergeSort {
      * @param   q2  A Queue in sorted order from least to greatest.
      * @return      The smallest item that is in q1 or q2.
      */
-    private static <Item extends Comparable> Item getMin(
+    public static <Item extends Comparable> Item getMin(
             Queue<Item> q1, Queue<Item> q2) {
         if (q1.isEmpty()) {
             return q2.dequeue();
@@ -34,8 +34,13 @@ public class MergeSort {
     /** Returns a queue of queues that each contain one item from items. */
     private static <Item extends Comparable> Queue<Queue<Item>>
             makeSingleItemQueues(Queue<Item> items) {
-        // Your code here!
-        return null;
+        Queue<Queue<Item>> res = new Queue<>();
+        while(!items.isEmpty()) {
+            Queue<Item> tmpQueue = new Queue<>();
+            tmpQueue.enqueue(items.dequeue());
+            res.enqueue(tmpQueue);
+        }
+        return res;
     }
 
     /**
@@ -53,14 +58,37 @@ public class MergeSort {
      */
     private static <Item extends Comparable> Queue<Item> mergeSortedQueues(
             Queue<Item> q1, Queue<Item> q2) {
-        // Your code here!
-        return null;
+        Queue<Item> res = new Queue<>();
+        while (!q1.isEmpty() || !q2.isEmpty()) {
+            Item tmp = getMin(q1, q2);
+            res.enqueue(tmp);
+        }
+        return res;
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
-        // Your code here!
+        Queue<Queue<Item>> input = makeSingleItemQueues(items);
+        while (!input.isEmpty()) {
+            int size = input.size();
+            if (size == 1) {
+                // Note: items pointer is passed by reference
+                items = input.dequeue();
+                return items;
+            }
+            if (size % 2 != 0) {
+                input.enqueue(new Queue<>());
+                size++;
+            }
+            while (size > 0) {
+                size -= 2;
+                Queue<Item> q1 = input.dequeue();
+                Queue<Item> q2 = input.dequeue();
+                Queue<Item> tmp = mergeSortedQueues(q1, q2);
+                input.enqueue(tmp);
+            }
+        }
         return items;
     }
 }
