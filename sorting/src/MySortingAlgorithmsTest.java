@@ -70,7 +70,7 @@ public class MySortingAlgorithmsTest {
         int[] original = BenchmarkUtility.randomInts(numInts, maxValue);
         int[] correct = BenchmarkUtility.copy(original);
         SortingAlgorithm javaSort = new MySortingAlgorithms.JavaSort();
-        SortingAlgorithm heapSort = new MySortingAlgorithms.HeapSort();
+        SortingAlgorithm heapSort = new MySortingAlgorithmsPrac.HeapSort();
         javaSort.sort(correct, correct.length);
         int[] input = BenchmarkUtility.copy(original);
         heapSort.sort(input, input.length);
@@ -86,11 +86,11 @@ public class MySortingAlgorithmsTest {
     @Test
     public void heapSortInplaceTest() {
         int numInts = 22;
-        int maxValue = 1000;
+        int maxValue = 300;
         int[] original = BenchmarkUtility.randomInts(numInts, maxValue);
         int[] correct = BenchmarkUtility.copy(original);
         SortingAlgorithm javaSort = new MySortingAlgorithms.JavaSort();
-        SortingAlgorithm heapSortInplace = new MySortingAlgorithms.HeapSortInplace();
+        SortingAlgorithm heapSortInplace = new MySortingAlgorithmsPrac.HeapSortInplace();
         javaSort.sort(correct, correct.length);
         int[] input = BenchmarkUtility.copy(original);
         heapSortInplace.sort(input, input.length);
