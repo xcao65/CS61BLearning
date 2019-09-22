@@ -104,12 +104,45 @@ public class MySortingAlgorithms {
       * not the entire algorithm, which is easier to do recursively.
       */
     public static class MergeSort implements SortingAlgorithm {
+        private int[] content;
         @Override
-        public void sort(int[] array, int k) {            
-            // TO-DO
+        public void sort(int[] array, int k) {
+            content = array;
+            mergeSort(0, k - 1);
+            return;
         }
 
-        // may want to add additional methods
+        private void mergeSort(int left, int right) {
+            // divide array into two halves
+            // base case: size == 1, return array it self
+            if (left >= right) return;
+            // use left, right pointer to devide array
+            int mid = left + (right - left) / 2;
+
+            // sort each half using sort() recursively
+            mergeSort(left, mid);
+            mergeSort(mid + 1, right);
+
+            // merge two halves into one and return
+            merge(left, mid, right);
+            return;
+        }
+
+        private void merge(int left, int mid, int right) {
+            int ptrL = left, ptrR = mid + 1, ptrS = 0;
+            int[] temp = new int[right - left + 1];
+            while (ptrS < temp.length) {
+                if (ptrL > mid || ptrR <= right && content[ptrR] < content[ptrL]) {
+                    temp[ptrS++] = content[ptrR++];
+                } else {
+                    temp[ptrS++] = content[ptrL++];
+                }
+            }
+            for (int ele : temp) {
+                content[left++] = ele;
+            }
+            return;
+        }
 
         @Override
         public String toString() {

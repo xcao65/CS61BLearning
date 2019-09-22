@@ -103,46 +103,67 @@ public class MySortingAlgorithmsTest {
         }
     }
 
-//    @Test
-//    public void correctnessTest() {
-//        /* Don't set maxValue too high or Distribution Sort will use
-//           up all available memory and your program will crash. */
-//        int numInts = 22;
-//        int maxValue = 1000;
-//        int[] original = BenchmarkUtility.randomInts(numInts, maxValue);
-//        int[] correct = BenchmarkUtility.copy(original);
-//        SortingAlgorithm javaSort = new MySortingAlgorithms.JavaSort();
-//        javaSort.sort(correct, correct.length);
-//
-//        SortingAlgorithm[] algorithms = {
+    @Test
+    public void mergeSortTest() {
+        int numInts = 22;
+        int maxValue = 300;
+        int[] original = BenchmarkUtility.randomInts(numInts, maxValue);
+        int[] correct = BenchmarkUtility.copy(original);
+        SortingAlgorithm javaSort = new MySortingAlgorithms.JavaSort();
+        SortingAlgorithm mergeSort = new MySortingAlgorithms.MergeSort();
+        javaSort.sort(correct, correct.length);
+        int[] input = BenchmarkUtility.copy(original);
+        mergeSort.sort(input, input.length);
+        assertArrayEquals("Result for MergeSort" + " incorrect: ",
+                correct, input);
+        System.out.println();
+        System.out.println("MergeSort: ");
+        for (int i = 0; i < input.length; i++) {
+            System.out.print(input[i] + " ");
+        }
+    }
+
+    @Test
+    public void correctnessTest() {
+        /* Don't set maxValue too high or Distribution Sort will use
+           up all available memory and your program will crash. */
+        int numInts = 22;
+        int maxValue = 1000;
+        int[] original = BenchmarkUtility.randomInts(numInts, maxValue);
+        int[] correct = BenchmarkUtility.copy(original);
+        SortingAlgorithm javaSort = new MySortingAlgorithms.JavaSort();
+        javaSort.sort(correct, correct.length);
+
+        SortingAlgorithm[] algorithms = {
 //                 new MySortingAlgorithms.InsertionSort(),
 //                 new MySortingAlgorithms.SelectionSort(),
-//                 new MySortingAlgorithms.MergeSort(),
+                 new MySortingAlgorithms.MergeSort()
 //                 new MySortingAlgorithms.DistributionSort(),
 //                 new MySortingAlgorithms.HeapSort(),
 //                 new MySortingAlgorithms.QuickSort(),
 //                 new MySortingAlgorithms.LSDSort(),
-//                 new MySortingAlgorithms.MSDSort()};
-//
-//        for (SortingAlgorithm sa : algorithms) {
-//            int[] input = BenchmarkUtility.copy(original);
-//            sa.sort(input, input.length);
-//            assertArrayEquals("Result for " + sa + " correct: ",
-//                              correct, input);
-//        }
-//
-//        int k = 20;
-//
-//        correct = BenchmarkUtility.copy(original);
-//        javaSort.sort(correct, k);
-//
-//        for (SortingAlgorithm sa : algorithms) {
-//            int[] input = BenchmarkUtility.copy(original);
-//            sa.sort(input, k);
-//            assertArrayEquals("Result for " + sa + " incorrect: ",
-//                              correct, input);
-//        }
-//    }
+//                 new MySortingAlgorithms.MSDSort()
+        };
+
+        for (SortingAlgorithm sa : algorithms) {
+            int[] input = BenchmarkUtility.copy(original);
+            sa.sort(input, input.length);
+            assertArrayEquals("Result for " + sa + " correct: ",
+                              correct, input);
+        }
+
+        int k = 20;
+
+        correct = BenchmarkUtility.copy(original);
+        javaSort.sort(correct, k);
+
+        for (SortingAlgorithm sa : algorithms) {
+            int[] input = BenchmarkUtility.copy(original);
+            sa.sort(input, k);
+            assertArrayEquals("Result for " + sa + " incorrect: ",
+                              correct, input);
+        }
+    }
 
 
 //    public static void main(String[] args) {

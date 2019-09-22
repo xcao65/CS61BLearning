@@ -29,4 +29,16 @@ public class MergeSortTest {
             assertEquals(i, (int)input.dequeue());
         }
     }
+
+    @Test
+    public void mergeSortRecursiveTest() {
+        Queue<Integer> input = new Queue<>();
+        for (int i = 9; i >= 0; i--) {
+            input.enqueue(i);
+        }
+        input = MergeSortRecursive.mergeSort(input);
+        for (int i = 0; i < 10; i++) {
+            assertEquals(i, (int)input.dequeue());
+        }
+    }
 }

@@ -132,4 +132,19 @@ public class MySortingAlgorithmsPrac {
             return;
         }
     }
+
+    public static class MergeSort implements SortingAlgorithm {
+        private int[] content;
+        private int size;
+
+        @Override
+        public String toString() {
+            return "Heap Sort";
+        }
+
+        @Override
+        public void sort(int[] array, int k) {
+
+        }
+    }
 }
