@@ -34,17 +34,73 @@ public class WaterFlower {
     }
 
     public int getNumOfStepsV2(int[] array, int capacity) {
-        //      2, 4, 3, 3, 1   == 4
-        // cap: 2  0  1  1  0
-        int cap = capacity;
-        int steps = array.length;
+        // currentWater: water left in hand, start from capacity
+        // totalSteps: steps counted, start from 0
+        // if valid array, iterate through array, count steps for each iteration
+        //  - enough water: step++, currentWater -= array[i]
+        //  - not enough: step += 2 * i + 1, currentWater = capacity - array[i]
+        int currentWater = capacity;
+        int totalSteps = 0;
+
         for (int i = 0; i < array.length; i++) {
-            if (cap < array[i]) {
-                steps += i * 2;
-                cap = capacity;
+            if (array[i] > capacity) {
+                return -1;
             }
-            cap -= array[i];
+
+            if (currentWater >= array[i]) {
+                totalSteps++;
+            } else {
+                totalSteps += 2 * i + 1;
+                currentWater = capacity;
+            }
+            currentWater -= array[i];
         }
-        return steps;
+
+        return totalSteps;
+    }
+
+    public int getNumOfStepsImpl(int[] array, int capacity) {
+        // to be implemented
+        return -1;
+    }
+
+    public int getNumOfRefillsBothEnds(int[] array, int capacity) {
+        // leftWater, rightWater
+        // leftIndex, rightIndex
+        // - enough: water -= array[index]
+        // - not: water = cap, water -= array[index], totalRefills++
+        int leftWater = capacity;
+        int rightWater = capacity;
+        int leftIndex = 0;
+        int rightIndex = array.length - 1;
+        int totalRefills = 0;
+
+        while (leftIndex <= rightIndex) {
+            if (leftIndex == rightIndex) {
+                if (leftWater + rightWater < array[leftIndex]) {
+                    totalRefills++;
+                }
+                break;
+            }
+
+            if (leftWater < array[leftIndex]) {
+                leftWater = capacity;
+                totalRefills++;
+            }
+            if (rightWater < array[rightIndex]) {
+                rightWater = capacity;
+                totalRefills++;
+            }
+            leftWater -= array[leftIndex];
+            rightWater -= array[rightIndex];
+            leftIndex++;
+            rightIndex--;
+        }
+        return totalRefills;
+    }
+
+    public int getNumOfRefillsBothEndsImpl(int[] array, int capacity) {
+        // to be implemented
+        return -1;
     }
 }
