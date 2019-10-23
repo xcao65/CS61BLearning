@@ -1,5 +1,6 @@
 package OA.GoogleOA;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 public class StrictSmaller {
 
@@ -31,11 +32,9 @@ public class StrictSmaller {
         int[] prefixSumBuckets = this.calPrefixSumBuckets(arrAVal);
 
         // for each arrB, get value from prefixSum Bucket
-        int[] res = new int[arrBVal.length];
-        for (int i = 0; i < arrBVal.length; i++) {
-            res[i] = prefixSumBuckets[arrBVal[i] - 1];
-        }
-        return res;
+        return Arrays.stream(arrBVal)
+                .map(curBVal -> prefixSumBuckets[curBVal - 1])
+                .toArray();
     }
 
     private int[] calPrefixSumBuckets(int[] array) {
@@ -43,9 +42,7 @@ public class StrictSmaller {
         for (int ssVal : array) {
             res[ssVal]++;
         }
-        for (int i = 1; i < 11; i++) {
-            res[i] += res[i - 1];
-        }
+        Arrays.parallelPrefix(res, Integer::sum);
         return res;
     }
 
@@ -69,23 +66,12 @@ public class StrictSmaller {
     }
 
     private int[] calSSVal(String input) {
-        String[] arr = input.split(",");
-        int[] res = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            String cur = arr[i];
-            char minChar = cur.charAt(0);
-            int count = 1;
-            for (int j = 1; j < cur.length(); j++) {
-                char curChar = cur.charAt(j);
-                if (curChar - minChar < 0) {
-                    minChar = curChar;
-                    count = 1;
-                } else if (curChar - minChar == 0) {
-                    count++;
-                }
-            }
-            res[i] = count;
-        }
-        return res;
+        return Pattern.compile(",").splitAsStream(input)
+                .mapToInt(str -> {
+                    int minChar = str.chars().min().getAsInt();
+                    return (int)str.chars()
+                            .filter(curChar -> curChar == minChar)
+                            .count();
+                }).toArray();
     }
 }
