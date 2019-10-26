@@ -64,16 +64,16 @@ public class WaterFlower {
         return -1;
     }
 
-    public int getNumOfRefillsBothEnds(int[] array, int capacity) {
+    public int getNumOfRefillsBothEnds(int[] array, int capacity1, int capacity2) {
         // leftWater, rightWater
         // leftIndex, rightIndex
         // - enough: water -= array[index]
         // - not: water = cap, water -= array[index], totalRefills++
-        int leftWater = capacity;
-        int rightWater = capacity;
+        int leftWater = capacity1;
+        int rightWater = capacity2;
         int leftIndex = 0;
         int rightIndex = array.length - 1;
-        int totalRefills = 0;
+        int totalRefills = 2;
 
         while (leftIndex <= rightIndex) {
             if (leftIndex == rightIndex) {
@@ -84,11 +84,11 @@ public class WaterFlower {
             }
 
             if (leftWater < array[leftIndex]) {
-                leftWater = capacity;
+                leftWater = capacity1;
                 totalRefills++;
             }
             if (rightWater < array[rightIndex]) {
-                rightWater = capacity;
+                rightWater = capacity2;
                 totalRefills++;
             }
             leftWater -= array[leftIndex];
@@ -99,7 +99,7 @@ public class WaterFlower {
         return totalRefills;
     }
 
-    public int getNumOfRefillsBothEndsImpl(int[] array, int capacity) {
+    public int getNumOfRefillsBothEndsImpl(int[] array, int capacity1, int capacity2) {
         // to be implemented
         return -1;
     }

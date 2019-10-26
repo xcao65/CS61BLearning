@@ -11,9 +11,9 @@ public class WaterFlowerTest {
         int cap = 4;
         int exp = 17;
         int res = runner.getNumOfSteps(inputArr, cap);
-        assertEquals(res, exp);
+        assertEquals(exp, res);
         int resImpl = runner.getNumOfStepsImpl(inputArr, cap);
-        assertEquals(resImpl, exp);
+//        assertEquals(exp, resImpl);
     }
 
     @Test
@@ -23,9 +23,9 @@ public class WaterFlowerTest {
         int cap = 3;
         int exp = -1;
         int res = runner.getNumOfSteps(inputArr, cap);
-        assertEquals(res, exp);
+        assertEquals(exp, res);
         int resImpl = runner.getNumOfStepsImpl(inputArr, cap);
-        assertEquals(resImpl, exp);
+//        assertEquals(exp, resImpl);
     }
 
     @Test
@@ -35,9 +35,9 @@ public class WaterFlowerTest {
         int cap = 6;
         int exp = 17;
         int res = runner.getNumOfSteps(inputArr, cap);
-        assertEquals(res, exp);
+        assertEquals(exp, res);
         int resImpl = runner.getNumOfStepsImpl(inputArr, cap);
-        assertEquals(resImpl, exp);
+//        assertEquals(exp, resImpl);
     }
 
     @Test
@@ -46,42 +46,45 @@ public class WaterFlowerTest {
         int[] inputArr = {2, 4, 5, 1, 2};
         int cap = 6;
         int res = runner.getNumOfStepsV2(inputArr, cap);
-        assertEquals(res, 17);
+        assertEquals(17, res);
     }
 
     @Test
     public void getNumOfRefillsBothEndsTest1() {
         WaterFlower runner = new WaterFlower();
         int[] inputArr = {2, 4, 5, 1, 2};
-        int cap = 6;
-        int exp = 1;
-        int res = runner.getNumOfRefillsBothEnds(inputArr, cap);
-        assertEquals(res, exp);
-        int resImpl = runner.getNumOfRefillsBothEndsImpl(inputArr, cap);
-        assertEquals(resImpl, exp);
+        int cap1 = 5;
+        int cap2 = 7;
+        int exp = 3;
+        int res = runner.getNumOfRefillsBothEnds(inputArr, cap1, cap2);
+        assertEquals(exp, res);
+        int resImpl = runner.getNumOfRefillsBothEndsImpl(inputArr, cap1, cap2);
+//        assertEquals(exp, resImpl);
     }
 
     @Test
     public void getNumOfRefillsBothEndsTest2() {
         WaterFlower runner = new WaterFlower();
         int[] inputArr = {6, 4, 4, 5, 1, 2};
-        int cap = 6;
-        int exp = 3;
-        int res = runner.getNumOfRefillsBothEnds(inputArr, cap);
-        assertEquals(res, exp);
-        int resImpl = runner.getNumOfRefillsBothEndsImpl(inputArr, cap);
-        assertEquals(resImpl, exp);
+        int cap1 = 6;
+        int cap2 = 7;
+        int exp = 5;
+        int res = runner.getNumOfRefillsBothEnds(inputArr, cap1, cap2);
+        assertEquals(exp, res);
+        int resImpl = runner.getNumOfRefillsBothEndsImpl(inputArr, cap1, cap2);
+//        assertEquals(exp, resImpl);
     }
 
     @Test
     public void getNumOfRefillsBothEndsTest3() {
         WaterFlower runner = new WaterFlower();
-        int[] inputArr = {6, 4, 5, 1, 2};
-        int cap = 6;
-        int exp = 1;
-        int res = runner.getNumOfRefillsBothEnds(inputArr, cap);
-        assertEquals(res, exp);
-        int resImpl = runner.getNumOfRefillsBothEndsImpl(inputArr, cap);
-        assertEquals(resImpl, exp);
+        int[] inputArr = {6, 4, 5, 1, 5};
+        int cap1 = 6;
+        int cap2 = 7;
+        int exp = 4;
+        int res = runner.getNumOfRefillsBothEnds(inputArr, cap1, cap2);
+        assertEquals(exp, res);
+        int resImpl = runner.getNumOfRefillsBothEndsImpl(inputArr, cap1, cap2);
+//        assertEquals(exp, resImpl);
     }
 }
